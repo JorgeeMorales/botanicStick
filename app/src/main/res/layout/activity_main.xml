@@ -3,16 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Título -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dispositivos Bluetooth"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+
+    <!-- ListView -->
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/textViewTitle"
         android:dividerHeight="8dp"
-        android:padding="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:clipToPadding="false"
-        android:divider="@android:color/transparent"
-
-        ></ListView>
-
+        android:divider="@android:color/transparent" />
 
 </RelativeLayout>

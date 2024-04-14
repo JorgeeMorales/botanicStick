@@ -9,9 +9,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     private BluetoothAdapter bluetoothAdapter;
-    private ArrayList<String> deviceList = new ArrayList<>();
-    private ArrayAdapter<String> adapter;
+    private ArrayList<BluetoothDevice> deviceList = new ArrayList<>();
+    private CustomListAdapter adapter;
     private BluetoothDevice selectedDevice;
     private ConnectThread connectThread;
     private DataDisplayActivity dataDisplayActivity;
@@ -45,14 +48,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ListView listView = findViewById(R.id.listView);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, deviceList);
+        adapter = new CustomListAdapter();
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @SuppressLint("MissingPermission")
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedDevice = bluetoothAdapter.getBondedDevices().toArray(new BluetoothDevice[0])[i];
+                selectedDevice = deviceList.get(i);
                 if (selectedDevice != null) {
                     connectThread = new ConnectThread(selectedDevice);
                     connectThread.start();
@@ -94,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
             if (pairedDevices.size() > 0) {
                 for (BluetoothDevice device : pairedDevices) {
-                    deviceList.add(device.getName() + "\n" + device.getAddress());
+                    deviceList.add(device);
                 }
                 adapter.notifyDataSetChanged();
             } else {
@@ -191,6 +194,33 @@ public class MainActivity extends AppCompatActivity {
                     closeException.printStackTrace();
                 }
             }
+        }
+    }
+
+    private class CustomListAdapter extends ArrayAdapter<BluetoothDevice> {
+        public CustomListAdapter() {
+            super(MainActivity.this, R.layout.list_item_device, deviceList);
+        }
+
+        @SuppressLint("MissingPermission")
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.list_item_device, parent, false);
+            }
+
+            ImageView iconBluetooth = convertView.findViewById(R.id.iconBluetooth);
+            TextView deviceName = convertView.findViewById(R.id.deviceName);
+
+            BluetoothDevice device = deviceList.get(position);
+
+            // Set the Bluetooth icon (you might want to change this)
+            iconBluetooth.setImageResource(R.drawable.baseline_bluetooth_24);
+
+            // Set the device name
+            deviceName.setText(device.getName());
+
+            return convertView;
         }
     }
 }
