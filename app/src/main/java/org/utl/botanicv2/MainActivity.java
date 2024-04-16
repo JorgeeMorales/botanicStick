@@ -22,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -162,7 +164,11 @@ public class MainActivity extends AppCompatActivity {
                             public void run() {
                                 DataDisplayActivity dataDisplayActivity = DataDisplayActivity.getInstance();
                                 if (dataDisplayActivity != null) {
-                                    dataDisplayActivity.updateData(receivedData);
+                                    try {
+                                        dataDisplayActivity.updateData(receivedData);
+                                    } catch (JSONException e) {
+                                        throw new RuntimeException(e);
+                                    }
                                 } else {
                                     Intent intent = new Intent(MainActivity.this, DataDisplayActivity.class);
                                     intent.putExtra("data", receivedData);

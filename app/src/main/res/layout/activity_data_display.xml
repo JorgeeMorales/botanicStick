@@ -1,13 +1,152 @@
 <!-- activity_data_display.xml -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="18sp" />
+    <!-- activity_data_display.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="#00FFFFFF"
+android:backgroundTint="#00FFFFFF">
+
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/image_habitacion"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            app:srcCompat="@drawable/anturio_planta" />
+
+
+        <TextView
+            android:id="@+id/txtNombreHabitacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/image_habitacion"
+            android:text="Anturio"
+            android:textColor="@color/black" />
+
+
+
+        <TextView
+            android:id="@+id/labelTemperatura"
+            android:layout_width="250px"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNombreHabitacion"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/image_habitacion"
+            android:text="Temperatura:"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txtTemperatura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNombreHabitacion"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/labelTemperatura"
+            android:text="."
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/labelHumedad"
+            android:layout_width="250px"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTemperatura"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/image_habitacion"
+            android:text="Humedad:"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txtHumedad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTemperatura"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/labelHumedad"
+            android:text="."
+            android:textColor="@color/black" />
+
+
+        <TextView
+            android:id="@+id/labelHumedadTierra"
+            android:layout_width="250px"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtHumedad"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/image_habitacion"
+            android:text="Tierra:"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txtTierra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtHumedad"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/labelHumedadTierra"
+            android:text="."
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btnMonitorear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTierra"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/image_habitacion"
+            android:backgroundTint="@color/green_text"
+
+            android:text="Monitorear" />
+
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+
 
 </RelativeLayout>
